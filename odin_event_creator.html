@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ODIN Calendar Event Creator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+    <h2>ODIN Calendar Event Creator</h2>
+    <p>Fill in the details to generate a WhatsApp-formatted event post:</p>
+    <form id="eventForm">
+        <label>Event Category Emoji:</label><br>
+        <select id="emoji">
+            <option value="⚡️">⚡️ Zoom Call</option>
+            <option value="🛜">🛜 ODIN Conference</option>
+            <option value="🖼️">🖼️ Exhibition</option>
+            <option value="🛠️">🛠️ Workshop</option>
+            <option value="🗣️">🗣️ Seminar</option>
+            <option value="📚">📚 Course</option>
+            <option value="🚪">🚪 Open Day</option>
+            <option value="🤩">🤩 Fun Stuff</option>
+        </select><br><br>
+
+        <label>Event Title:</label><br>
+        <input type="text" id="title" style="width: 100%;" required><br><br>
+
+        <label>Date & Time:</label><br>
+        <input type="text" id="datetime" style="width: 100%;" placeholder="e.g. Sat 29 June, 6pm–8pm" required><br><br>
+
+        <label>Location:</label><br>
+        <input type="text" id="location" style="width: 100%;" required><br><br>
+
+        <label>Optional Description:</label><br>
+        <textarea id="description" rows="3" style="width: 100%;"></textarea><br><br>
+
+        <label>Website Link:</label><br>
+        <input type="text" id="link" style="width: 100%;"><br><br>
+
+        <button type="button" onclick="generateMessage()">Generate Message</button>
+    </form>
+
+    <h3>Formatted WhatsApp Message:</h3>
+    <pre id="output" style="background: #f4f4f4; padding: 10px;"></pre>
+
+    <script>
+    function generateMessage() {
+        const emoji = document.getElementById("emoji").value;
+        const title = document.getElementById("title").value.trim();
+        const datetime = document.getElementById("datetime").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const link = document.getElementById("link").value.trim();
+
+        let message = `(${emoji}) *${title}*\n🗓️ _${datetime}_\n📍 ${location}`;
+        if (description) message += `\n_${description}_`;
+        if (link) message += `\n${link}`;
+
+        document.getElementById("output").textContent = message;
+    }
+    </script>
+</body>
+</html>
